@@ -265,22 +265,24 @@ class ProductAttribute(models.Model):
 class Media(models.Model):
      """media attribute table"""
      product_inventory = models.ForeignKey(
-        ProductInventory,
+         ProductInventory,
         on_delete=models.PROTECT,
-        related_name-'media',
+        related_name='media',
     )
-    img_url = models.ImageField()
-    alt_text = models.CharField(
+     img_url = models.ImageField(
+        upload_to="media",
+    )
+     alt_text = models.CharField(
         max_length=255,
     )
-    is_feature = models.BooleanField(
+     is_feature = models.BooleanField(
         default=False,
     )
-    created = models.DateTimeField(
+     created = models.DateTimeField(
         auto_now_add=True,
         editable=False,
     )
-    updated = models.DateTimeField(
+     updated = models.DateTimeField(
         auto_now=True,
     )
     
@@ -303,20 +305,22 @@ class Stock(models.Model):
     )
     
 class ProductAttributeValues(models.Model):
-    attributevalues = models.ForeignKey(
+     attributevalues = models.ForeignKey(
         "ProductAttributeValue",
         related_name="attributevalues",
         on_delete=models.PROTECT,
     )
-    productinventory = models.ForeignKey(
+     productinventory = models.ForeignKey(
         ProductInventory,
-        related_name"ProductAttributeValues"
+        related_name="ProductAttributeValues",
         on_delete=models.PROTECT,
     )
-    class Meta:
-        unique_together = {("attributevalues", "productinventory"),}
+     class Meta:
+        unique_together = ["attributevalues", "productinventory"]
+        #you have to add abstract class
+        abstract = True
         
-clas ProductTypeAttribute(models.Model):
+class ProductTypeAttribute(models.Model):
     product_attribute = models.ForeignKey(
         ProductAttribute,
         related_name="productattribute",
@@ -329,4 +333,5 @@ clas ProductTypeAttribute(models.Model):
     )
     
     class Meta:
-        unique_together = {("product_attribute", "product_type"),}
+        unique_together = ["product_attribute", "product_type"]
+        abstract = True
