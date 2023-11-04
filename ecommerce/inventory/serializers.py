@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ecommerce.inventory.models import Category, Media, Product, Stock
+from ecommerce.inventory.models import Category, Media, Product, Stock, ProductAttributeValues
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

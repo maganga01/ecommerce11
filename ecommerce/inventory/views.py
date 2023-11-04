@@ -6,11 +6,12 @@ from .serializers import CategorySerializer, ProductSerializer
 class ListCreateCategoryAPIView(ListCreateAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
-    permission_classes = [IsAuthenticated]
+    
 class RetrieveUpdateDestroyCategoryAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
     permission_classes = [IsAuthenticated]
+    
 
 
 class ListCreateProductAPIView(ListCreateAPIView):
